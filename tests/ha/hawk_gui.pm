@@ -33,6 +33,11 @@ sub install_docker {
 sub run {
     my ($self) = @_;
     my $cluster_name = get_cluster_name;
+    my $version      = get_required_var('VERSION');
+
+    # Override with SLE version of fixed HDD to ensure correct needles are used.
+    my $sh_cmd_os_ver = "printf \$(. /etc/os-release; printf \$VERSION)";
+    set_var('VERSION', script_output($sh_cmd_os_ver), reload_needles => 1);
 
     # Wait for each cluster node to check for its hawk service
     barrier_wait("HAWK_GUI_INIT_$cluster_name");
@@ -64,7 +69,6 @@ sub run {
 
     # Run test
     my $browser    = 'firefox';
-    my $version    = get_required_var('VERSION');
     my $node1      = choose_node(1);
     my $node2      = choose_node(2);
     my $results    = "$path/$pyscr.results";
