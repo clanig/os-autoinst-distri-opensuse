@@ -29,6 +29,7 @@ schedule:
   - console/sle15_workarounds
   - console/hostname
   - console/force_scheduled_tasks
+  - console/scc_deregistration
   - shutdown/grub_set_bootargs
   - shutdown/cleanup_before_shutdown
   - shutdown/shutdown
