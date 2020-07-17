@@ -137,6 +137,12 @@ sub run {
             barrier_create("FS_CHECKED_${fs_tag}_$cluster_name",          $num_nodes);
         }
 
+        # Create one upgrade barrier for each node
+        for (1 .. $num_nodes) {
+            barrier_create("NODE_UPGRD_${cluster_name}_NODE$_",       $num_nodes);
+            barrier_create("NODE_UPDATE_${cluster_name}_NODE$_",       $num_nodes);
+        }
+
         # Create barriers for SAP cluster
         # Note: we always create these barries even if they are not used, mainly
         # because it's not easy to know at this stage that we are testing a SAP cluster...
