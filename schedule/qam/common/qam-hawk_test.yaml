@@ -1,0 +1,9 @@
+name:           qam-hawk_test
+description:    >
+  Test HAWK GUI
+schedule:
+  - migration/version_switch_origin_system
+  - boot/boot_to_desktop
+  - console/system_prepare
+  - console/consoletest_setup
+  - ha/hawk_gui
